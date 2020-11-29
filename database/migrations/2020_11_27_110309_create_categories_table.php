@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('parent_id')->unsigned()->index()->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('categories');
