@@ -3,6 +3,7 @@
 namespace Tests\Unit\Models\Categories;
 
 use Tests\TestCase;
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 // use PHPUnit\Framework\TestCase;
@@ -49,5 +50,17 @@ class CategoryTest extends TestCase
         $anotherCategory = Category::factory()->create(['order' => 1]);
 
         $this->assertEquals($anotherCategory->name, Category::ordered()->first()->name);
+    }
+
+    /** @test */
+    public function it_has_many_products()
+    {
+        $category = Category::factory()->create();
+
+        $category->products()->save(
+            Product::factory()->create()
+        );
+
+        $this->assertInstanceOf(Product::class, $category->products->first());
     }
 }
