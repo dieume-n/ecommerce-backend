@@ -32,4 +32,21 @@ class ProductControllerTest extends TestCase
                 'meta'
             ]);
     }
+
+    /** @test */
+    public function it_shows_a_product()
+    {
+        $product = Product::factory()->create();
+        $this->json('GET', route('products.show', $product->slug))
+            ->assertJsonFragment([
+                'name' => $product->name
+            ]);
+    }
+
+    /** @test */
+    public function it_fail_if_the_product_cannot_be_found()
+    {
+        $this->json('GET', route('products.show', 'nope'))
+            ->assertStatus(404);
+    }
 }
