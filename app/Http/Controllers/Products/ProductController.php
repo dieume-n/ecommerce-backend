@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Products;
 
 use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Scoping\Scopes\CategoryScope;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductIndexResource;
-use App\Scoping\Scopes\CategoryScope;
 
 class ProductController extends Controller
 {
@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function scopes()
     {
         return [
-            'category' => new CategoryScope()
+            'category' => new CategoryScope(),
         ];
     }
 }

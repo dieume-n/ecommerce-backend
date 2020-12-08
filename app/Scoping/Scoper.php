@@ -22,6 +22,10 @@ class Scoper
                 continue;
             }
 
+            if ($this->request->get($key) == null) {
+                break;
+            }
+
             $scope->apply($builder, $this->request->get($key));
         }
 
