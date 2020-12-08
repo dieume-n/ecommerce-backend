@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ProductControllerTest extends TestCase
 {
     /** @test */
-    public function it_show_a_colelction_of_products()
+    public function it_show_a_collection_of_products()
     {
         $products = Product::factory(2)->create();
 
