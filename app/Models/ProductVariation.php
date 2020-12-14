@@ -3,13 +3,26 @@
 namespace App\Models;
 
 use App\Models\Product;
+use App\Ecommerce\Money;
+use App\Models\Traits\HasPrice;
 use App\Models\ProductVariationType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductVariation extends Model
 {
-    use HasFactory;
+    use HasFactory, HasPrice;
+
+    public function getPriceAttribute($value)
+    {
+        if ($value === null) return $this->product->price;
+        return new Money($value);
+    }
+
+    public function priceVaries()
+    {
+        return $this->price->amount() !== $this->product->price->amount();
+    }
 
     public function type()
     {
