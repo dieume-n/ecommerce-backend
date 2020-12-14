@@ -4,6 +4,7 @@ namespace Tests\Unit\Models\Products;
 
 use Tests\TestCase;
 // use PHPUnit\Framework\TestCase;
+use App\Models\Stock;
 use App\Models\Product;
 use App\Ecommerce\Money;
 use App\Models\ProductVariation;
@@ -73,5 +74,16 @@ class ProductVariationTest extends TestCase
         ]);
 
         $this->assertTrue($variation->priceVaries());
+    }
+
+    /** @test */
+    public function it_has_many_stocks()
+    {
+        $variation = ProductVariation::factory()->create();
+        $variation->stocks()->save(
+            Stock::factory()->make()
+        );
+
+        $this->assertInstanceOf(Stock::class, $variation->stocks()->first());
     }
 }
