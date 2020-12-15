@@ -108,6 +108,7 @@ class ProductVariationTest extends TestCase
             ])
         );
 
+        $this->assertIsNumeric($variation->stock->first()->pivot->stock);
         $this->assertEquals($variation->stock->first()->pivot->stock, $quantity);
     }
 
@@ -119,6 +120,7 @@ class ProductVariationTest extends TestCase
             Stock::factory()->make()
         );
 
+        $this->assertIsBool($variation->stock->first()->pivot->in_stock);
         $this->assertTrue($variation->stock->first()->pivot->in_stock);
     }
 
@@ -130,6 +132,7 @@ class ProductVariationTest extends TestCase
             Stock::factory()->make()
         );
 
+        $this->assertIsBool($variation->inStock());
         $this->assertTrue($variation->inStock());
     }
 
@@ -143,6 +146,7 @@ class ProductVariationTest extends TestCase
             ])
         );
 
+        $this->assertIsInt($variation->stockCount());
         $this->assertEquals($variation->stockCount(), $quantity);
     }
 }
