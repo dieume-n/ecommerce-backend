@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class SignupTest extends TestCase
+class SignupControllerTest extends TestCase
 {
     /** @test */
     public function it_requires_a_name()
