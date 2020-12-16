@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\MeController;
 use App\Http\Controllers\Auth\SigninController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Products\ProductController;
@@ -27,4 +28,5 @@ Route::resource('/products', ProductController::class);
 Route::group(['prefix' => 'auth'], function () {
     Route::post('signup', [SignupController::class, 'signup']);
     Route::post('signin', [SigninController::class, 'signin']);
+    Route::get('me', [MeController::class, 'me']);
 });
