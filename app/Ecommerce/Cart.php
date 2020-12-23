@@ -3,6 +3,7 @@
 namespace App\Ecommerce;
 
 use App\Models\User;
+use App\Ecommerce\Money;
 
 class Cart
 {
@@ -40,6 +41,20 @@ class Cart
     public function isEmpty()
     {
         return $this->user->cart->sum('pivot.quantity') === 0;
+    }
+
+    public function subTotal()
+    {
+        $subTotal = $this->user->cart->sum(function ($product) {
+            return $product->price->amount() * $product->pivot->quantity;
+        });
+
+        return new Money($subTotal);
+    }
+
+    public function total()
+    {
+        return $this->subTotal();
     }
 
     protected function getStorePayload($products)

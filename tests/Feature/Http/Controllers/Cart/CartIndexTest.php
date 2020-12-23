@@ -42,4 +42,26 @@ class CartIndexTest extends TestCase
                 'empty' => true
             ]);
     }
+
+    /** @test */
+    public function index_shows_a_formatted_subtotal()
+    {
+        $user = User::factory()->create();
+
+        $this->jsonAs($user, 'GET', 'api/cart')
+            ->assertJsonFragment([
+                'subTotal' => "$0.00"
+            ]);
+    }
+
+    /** @test */
+    public function index_shows_a_formatted_total()
+    {
+        $user = User::factory()->create();
+
+        $this->jsonAs($user, 'GET', 'api/cart')
+            ->assertJsonFragment([
+                'total' => "$0.00"
+            ]);
+    }
 }
