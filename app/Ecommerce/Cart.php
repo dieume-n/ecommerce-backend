@@ -4,10 +4,13 @@ namespace App\Ecommerce;
 
 use App\Models\User;
 use App\Ecommerce\Money;
+use Illuminate\Support\Str;
 
 class Cart
 {
     protected $user;
+    protected $changed = false;
+    protected $stockChanged = [];
 
     public function __construct(User $user)
     {
@@ -55,6 +58,30 @@ class Cart
     public function total()
     {
         return $this->subTotal();
+    }
+
+    public function sync()
+    {
+        $this->user->cart->each(function ($product) {
+            $quantity = $product->minStock($product->pivot->quantity);
+            $this->stockChanged[Str::lower($product->id)] = $quantity != $product->pivot->quantity;
+            // $this->changed = $quantity != $product->pivot->quantity;
+
+            $product->pivot->update([
+                'quantity' => $quantity
+            ]);
+        });
+    }
+
+    public function hasChanged()
+    {
+        foreach ($this->stockChanged as $key => $value) {
+            if ($value) {
+                $this->changed = true;
+                break;
+            }
+        }
+        return $this->changed;
     }
 
     protected function getStorePayload($products)

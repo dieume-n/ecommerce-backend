@@ -35,6 +35,11 @@ class ProductVariation extends Model
         return $this->stock->sum('pivot.stock');
     }
 
+    public function minStock($count)
+    {
+        return min($this->stockCount(), $count);
+    }
+
     public function type()
     {
         return $this->hasOne(ProductVariationType::class, 'id', 'product_variation_type_id');
