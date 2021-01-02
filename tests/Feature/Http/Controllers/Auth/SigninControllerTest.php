@@ -54,13 +54,15 @@ class SigninControllerTest extends TestCase
             'password' => 'password'
         ])
             ->assertJsonStructure([
-                'meta' => [
-                    'token'
-                ]
+                'token'
             ]);
+        // ->assertJsonStructure([
+        //     'meta' => [
+        //         'token'
+        //     ]
+        // ]);
     }
 
-    /** @test */
     public function it_returns_a_user_when_credentials_match()
     {
         $user = User::factory()->create();
