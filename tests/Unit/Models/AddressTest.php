@@ -19,12 +19,21 @@ class AddressTest extends TestCase
         $this->assertInstanceOf(Country::class, $address->country);
     }
     /** @test */
-    public function it_belongs_to_a_user()
+    public function it_sets_old_addresses_to_not_default()
     {
-        $address = Address::factory()->create([
-            'user_id' => User::factory()->create()->id
+        $user = User::factory()->create();
+
+        $oldAddress = Address::factory()->create([
+            "default" => true,
+            "user_id" => $user->id
         ]);
 
-        $this->assertInstanceOf(User::class, $address->user);
+        $newAddress = Address::factory()->create([
+            "default" => true,
+            "user_id" => $user->id
+        ]);
+
+        $this->assertFalse($oldAddress->fresh()->default);
+        $this->assertTrue($newAddress->fresh()->default);
     }
 }

@@ -26,12 +26,13 @@ class AddressStoreRequestTest extends TestCase
         $this->actingAs($user);
 
         $this->assertSame([
-            'name' => 'required|string',
-            'address_1' => 'required|string|max:255',
-            'address_2' => 'nullable|string',
-            'city' => 'required',
-            'postal_code' => 'required|string',
-            'country_id' => "required|exists:countries,id"
+            "name" => "required|string",
+            "address_1" => "required|string|max:255",
+            "address_2" => "sometimes|nullable|string",
+            "city" => "required",
+            "postal_code" => "required|string",
+            "country_id" => "required|exists:countries,id",
+            "default" => "boolean"
 
         ], $subject->rules());
     }
