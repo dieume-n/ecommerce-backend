@@ -18,4 +18,13 @@ abstract class TestCase extends BaseTestCase
             'Authorization' => "Bearer " . $token
         ]));
     }
+
+    public function actingAs($user, $driver = null)
+    {
+        $token = Auth::tokenById($user->id);
+        $this->withHeader('Authorization', "Bearer {$token}");
+        parent::actingAs($user);
+
+        return $this;
+    }
 }
