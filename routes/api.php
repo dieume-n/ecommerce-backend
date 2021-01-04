@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Auth\MeController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Auth\SigninController;
 use App\Http\Controllers\Auth\SignupController;
@@ -28,6 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('/categories', CategoryController::class);
 Route::resource('/products', ProductController::class);
 Route::resource('/addresses', AddressController::class);
+Route::get('/countries', [CountryController::class, 'index']);
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('signup', [SignupController::class, 'signup']);
