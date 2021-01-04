@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ShippingMethod;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Country extends Model
 {
     use HasFactory;
 
     protected $fillable = ['name', 'code'];
+
+    public function shippingMethods()
+    {
+        return $this->belongsToMany(ShippingMethod::class);
+    }
 }
