@@ -23,7 +23,7 @@ abstract class TestCase extends BaseTestCase
     {
         $token = Auth::tokenById($user->id);
         $this->withHeader('Authorization', "Bearer {$token}");
-        parent::actingAs($user);
+        // parent::actingAs($user);
 
         return $this;
     }

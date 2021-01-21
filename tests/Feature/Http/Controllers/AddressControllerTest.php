@@ -10,7 +10,6 @@ use App\Http\Controllers\AddressController;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
 use App\Http\Requests\Address\AddressStoreRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AddressControllerTest extends TestCase
 {
