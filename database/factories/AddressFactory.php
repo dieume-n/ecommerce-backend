@@ -28,7 +28,7 @@ class AddressFactory extends Factory
             'address_2' => $this->faker->secondaryAddress,
             'city' => $this->faker->city,
             'postal_code' => $this->faker->postcode,
-            'country_id' => Country::factory()->create()->id
+            'country_id' => Country::factory()
         ];
     }
 }

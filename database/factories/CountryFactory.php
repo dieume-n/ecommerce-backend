@@ -22,7 +22,7 @@ class CountryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'United States of America',
+            'name' => 'United States',
             'code' => 'US',
         ];
     }
